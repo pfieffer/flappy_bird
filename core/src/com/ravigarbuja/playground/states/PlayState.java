@@ -1,18 +1,16 @@
 package com.ravigarbuja.playground.states;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.ravigarbuja.playground.FlappyDemo;
-
-import javax.xml.soap.Text;
+import com.ravigarbuja.playground.sprites.Bird;
 
 public class PlayState extends State {
 
-    private Texture bird;
+    private Bird bird;
 
     protected PlayState(GameStateManager gsm) {
         super(gsm);
-        bird = new Texture("bird.png");
+        bird = new Bird(50, 100);
         //view port width and height adjustment using the cam
         cam.setToOrtho(false, FlappyDemo.WIDTH / 2, FlappyDemo.HEIGHT / 2);
     }
@@ -24,6 +22,8 @@ public class PlayState extends State {
 
     @Override
     protected void update(float deltaTime) {
+        handleInput();
+        bird.update(deltaTime);
 
     }
 
@@ -32,7 +32,7 @@ public class PlayState extends State {
         spriteBatch.setProjectionMatrix(cam.combined);
 
         spriteBatch.begin();
-        spriteBatch.draw(bird, 50, 50);
+        spriteBatch.draw(bird.getTexture(), bird.getPosition().x, bird.getPosition().y);
         spriteBatch.end();
     }
 

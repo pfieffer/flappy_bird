@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.ravigarbuja.playground.FlappyDemo;
 
+/*
+States for Menu Screen
+ */
 public class MenuState extends State{
 
     private Texture background;
@@ -31,5 +34,11 @@ public class MenuState extends State{
         spriteBatch.draw(background, 0, 0, FlappyDemo.WIDTH, FlappyDemo.HEIGHT);
         spriteBatch.draw(playButton, (FlappyDemo.WIDTH / 2) - (playButton.getWidth() / 2), (FlappyDemo.HEIGHT / 2));
         spriteBatch.end();
+    }
+
+    @Override
+    public void dispose() {
+        background.dispose();
+        playButton.dispose();
     }
 }

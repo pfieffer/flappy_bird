@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Nov 06 21:37:00 NPT 2019
+#Wed Nov 06 21:47:42 NPT 2019
 4.path=lib/x86/libgdx.so
 8.set=DEX
 6.path=badlogic.jpg

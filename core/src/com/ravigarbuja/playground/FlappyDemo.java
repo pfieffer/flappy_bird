@@ -18,8 +18,6 @@ public class FlappyDemo extends ApplicationAdapter {
 
 	private GameStateManager gsm;
 	private SpriteBatch spriteBatch;
-
-	Texture img;
 	
 	@Override
 	public void create () {
@@ -40,6 +38,5 @@ public class FlappyDemo extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		spriteBatch.dispose();
-		img.dispose();
 	}
 }

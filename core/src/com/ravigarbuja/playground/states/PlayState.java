@@ -20,7 +20,7 @@ public class PlayState extends State {
 
     protected PlayState(GameStateManager gsm) {
         super(gsm);
-        bird = new Bird(50, 100);
+        bird = new Bird(40, 200);
         //view port width and height adjustment using the cam
         cam.setToOrtho(false, FlappyDemo.WIDTH / 2, FlappyDemo.HEIGHT / 2);
 
@@ -51,6 +51,14 @@ public class PlayState extends State {
                 tubes) {
             if (cam.position.x - (cam.viewportWidth / 2) > tube.getPosTopTube().x + tube.getTopTube().getWidth()){
                 tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
+            }
+
+            /*
+            fixme: This is not how collision logic is handled on production level games where we may
+              have more than 4 tubes (obstacles)
+             */
+            if (tube.collides(bird.getBounds())){
+                gsm.set(new PlayState(gsm));
             }
 
         }

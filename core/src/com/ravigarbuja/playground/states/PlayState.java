@@ -3,6 +3,7 @@ package com.ravigarbuja.playground.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.ravigarbuja.playground.FlappyDemo;
 import com.ravigarbuja.playground.sprites.Bird;
@@ -12,9 +13,12 @@ public class PlayState extends State {
 
     private static final int TUBE_SPACING = 125;
     private static final int TUBE_COUNT = 4;
+    private static final int GROUND_Y_OFFSET = -50;
 
     private Bird bird;
     private Texture background;
+    private Texture ground;
+    private Vector2 groundPosition1, groundPosition2;
 
     private Array<Tube> tubes;
 
@@ -25,6 +29,10 @@ public class PlayState extends State {
         cam.setToOrtho(false, FlappyDemo.WIDTH / 2, FlappyDemo.HEIGHT / 2);
 
         background = new Texture("bg.png");
+
+        ground = new Texture("ground.png");
+        groundPosition1 = new Vector2(cam.position.x - cam.viewportWidth / 2, GROUND_Y_OFFSET);
+        groundPosition2 = new Vector2((cam.position.x - cam.viewportWidth / 2) + ground.getWidth(), GROUND_Y_OFFSET);
 
         tubes = new Array<>();
 
@@ -43,6 +51,7 @@ public class PlayState extends State {
     @Override
     protected void update(float deltaTime) {
         handleInput();
+        updateGround();
         bird.update(deltaTime);
 
         cam.position.x = bird.getPosition().x + 80; //80 offset
@@ -81,6 +90,9 @@ public class PlayState extends State {
             spriteBatch.draw(tube.getBottomTube(), tube.getPosBottomTube().x, tube.getPosBottomTube().y);
         }
 
+        spriteBatch.draw(ground, groundPosition1.x, groundPosition1.y);
+        spriteBatch.draw(ground, groundPosition2.x, groundPosition2.y);
+
         spriteBatch.end();
     }
 
@@ -93,5 +105,13 @@ public class PlayState extends State {
             tube.dispose();
         }
         System.out.println("Play State Disposed");
+    }
+
+    private void updateGround() {
+        if ((cam.position.x - cam.viewportWidth / 2) > groundPosition1.x + ground.getWidth())
+            groundPosition1.add(ground.getWidth() * 2, 0);
+
+        if ((cam.position.x - cam.viewportWidth / 2) > groundPosition2.x + ground.getWidth())
+            groundPosition2.add(ground.getWidth() * 2, 0);
     }
 }

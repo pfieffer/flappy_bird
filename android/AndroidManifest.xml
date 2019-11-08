@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.ravigarbuja.playground" >
+    package="com.ravigarbuja.flappybird" >
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,7 @@
         android:theme="@style/GdxTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="com.ravigarbuja.playground.AndroidLauncher"
+            android:name="com.ravigarbuja.flappybird.AndroidLauncher"
             android:label="@string/app_name" 
             android:screenOrientation="portrait"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize|screenLayout">

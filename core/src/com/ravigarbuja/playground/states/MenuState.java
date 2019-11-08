@@ -15,6 +15,8 @@ public class MenuState extends State{
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
+        //view port width and height adjustment using the cam
+        cam.setToOrtho(false, FlappyDemo.WIDTH / 2, FlappyDemo.HEIGHT / 2);
         background = new Texture("bg.png");
         playButton = new Texture("playbtn.png");
     }
@@ -33,9 +35,10 @@ public class MenuState extends State{
 
     @Override
     public void render(SpriteBatch spriteBatch) {
+        spriteBatch.setProjectionMatrix(cam.combined);
         spriteBatch.begin();
-        spriteBatch.draw(background, 0, 0, FlappyDemo.WIDTH, FlappyDemo.HEIGHT);
-        spriteBatch.draw(playButton, (FlappyDemo.WIDTH / 2) - (playButton.getWidth() / 2), (FlappyDemo.HEIGHT / 2));
+        spriteBatch.draw(background, 0, 0); //let the phone decide how wide and tall the background is
+        spriteBatch.draw(playButton, cam.position.x - playButton.getWidth() / 2, cam.position.y);
         spriteBatch.end();
     }
 

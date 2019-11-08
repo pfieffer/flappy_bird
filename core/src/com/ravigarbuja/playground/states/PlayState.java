@@ -87,7 +87,7 @@ public class PlayState extends State {
 
         spriteBatch.begin();
         spriteBatch.draw(background, cam.position.x - (cam.viewportWidth / 2), 0);
-        spriteBatch.draw(bird.getTexture(), bird.getPosition().x, bird.getPosition().y);
+        spriteBatch.draw(bird.getBirdTexture(), bird.getPosition().x, bird.getPosition().y);
 
         for (Tube tube : tubes) {
             spriteBatch.draw(tube.getTopTube(), tube.getPosTopTube().x, tube.getPosTopTube().y);

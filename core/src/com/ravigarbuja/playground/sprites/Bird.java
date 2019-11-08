@@ -1,5 +1,7 @@
 package com.ravigarbuja.playground.sprites;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
@@ -17,6 +19,7 @@ public class Bird {
 
     private Animation birdAnimation;
     Texture birdTexture;
+    private Sound flapSound;
 
     public Bird(int x, int y) {
         position = new Vector3(x, y, 0);
@@ -24,6 +27,7 @@ public class Bird {
         birdTexture = new Texture("birdanimation.png");
         birdAnimation = new Animation(new TextureRegion(birdTexture), 3, 0.5f);
         bounds = new Rectangle(x, y, birdTexture.getWidth() / 3, birdTexture.getHeight());
+        flapSound = Gdx.audio.newSound(Gdx.files.internal("sfx_wing.ogg"));
     }
 
     public void update(float deltaTime){
@@ -54,6 +58,7 @@ public class Bird {
     public void jump(){
         //as long as jump() method is called, the velocity in y axis stays positive, fighting the gravity
         velocity.y = 250;
+        flapSound.play(0.5f);
     }
 
     public Rectangle getBounds(){
@@ -62,5 +67,6 @@ public class Bird {
 
     public void dispose() {
        birdTexture.dispose();
+       flapSound.dispose();
     }
 }
